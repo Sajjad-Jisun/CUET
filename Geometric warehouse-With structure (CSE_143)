@@ -1,0 +1,143 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define optimize() ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+typedef long long ll;
+#define vi vector<int>
+#define vl vector<ll>
+#define pb push_back
+#define all(v) v.begin(), v.end()
+#define cy cout << "YES\n"
+#define cn cout << "NO\n"
+#define endl '\n'
+#define fl(s,e) for(ll i=s;i<e;i++)
+//ll ---> float, by typedef float ll;
+
+struct circle{
+    float r;
+};
+struct rectangle{
+    float w;
+    float h;
+};
+struct cube{
+    float a;
+    float b;
+    float c;
+};
+
+int main() {
+    struct circle cir[500];
+    struct rectangle rec[500];
+    struct cube cu[500];
+    
+    ll r_cnt=0,c_cnt=0,cu_cnt=0;
+
+    ll c_area=0;
+    ll r_area=0;
+    ll cube_area=0;
+
+    while(1){
+        ll rank=1;
+        cout<<"1. Add a circle"<<endl<<
+                "2. Add a rectangle"<<endl<<
+                "3. Add a cube"<<endl<<
+                "4. List items"<<endl<<
+                "5. Get Statistic"<<endl<<
+                "6. Exit"<<endl;
+
+        cout<<endl<<"Enter Your Choise: ";
+        int option; cin>>option;
+        if(option>=4)cout<<endl;
+        ll a,b,c;
+
+        switch(option){
+            case 1:
+            cout<<"What is the diameter: ";
+            cin>>a; cir[c_cnt].r=a;
+            c_area+=3.1416*a*a;
+            cout<<endl;
+            c_cnt++;
+            break;
+
+            case 2:
+            cout<<"What is the height: "; cin>>a;
+            cout<<"What is the width: "; cin>>b;
+            rec[r_cnt].h=a;
+            rec[r_cnt].w=b;
+            r_area+=a*b;
+            cout<<endl;
+            r_cnt++;
+            break;
+
+            case 3:
+            cout<<"What is the height: "; cin>>a;
+            cout<<"What is the width: "; cin>>b;
+            cout<<"What is the depth: "; cin>>c;
+            
+            cu[cu_cnt].a=a;
+            cu[cu_cnt].b=b;
+            cu[cu_cnt].c=c;
+
+            cube_area+=a*b*c;
+            cout<<endl;
+            cu_cnt++;
+            break;
+
+            case 4:
+            cout<<"ID     Type     Dimensions"<<endl;
+            cout<<"============================="<<endl;
+            
+            fl(0,c_cnt){
+                cout<<rank<<"    ";
+                cout<<"    Circle    ";
+                cout<<cir[i].r<<endl; rank++;
+            }
+            
+            fl(0,r_cnt){
+                cout<<rank<<"    ";
+                cout<<"  Rectangle   ";
+                cout<<rec[i].h<<" x "<<rec[i].w;
+                rank++;
+                cout<<endl;
+            }
+            
+            fl(0,cu_cnt){
+                cout<<rank<<"    ";
+                cout<<"     Cube     ";
+                cout<<cu[i].a<<" x "<<cu[i].b<<" x "<<cu[i].c<<endl;
+                rank++;
+            }
+            cout<<endl;
+            break;
+
+            case 5:
+            cout<<"Total shapes: "<<r_cnt+c_cnt+cu_cnt<<endl;
+            cout<<"Total number of Rectangles: "<<r_cnt<<endl;
+            cout<<"Total number of Circles: "<<c_cnt<<endl;
+            cout<<"Total number of Cube: "<<cu_cnt<<endl;
+            cout<<"Total area: "<<c_area+r_area+cube_area<<endl;
+
+            cout<<"The total area occupied by rectangles: "<<r_area<<" ";
+            cout<<"("<<(r_area*100)/(c_area+r_area+cube_area)<<"%"<<")"<<endl;
+
+            cout<<"The total area occupied by circles: "<<c_area<<" ";
+            cout<<"("<<(c_area*100)/(c_area+r_area+cube_area)<<"%"<<")"<<endl;
+
+            cout<<"The total area occupied by cubes: "<<cube_area<<" ";
+            cout<<"("<<(cube_area*100)/(c_area+r_area+cube_area)<<"%"<<")"<<endl;
+            cout<<endl;
+
+            break;
+
+            case 6:
+            return 0;
+
+            default:
+            cout<<"Wrong Input."<<endl;
+            cout<<endl;
+        }
+    }
+
+    return 0;
+}
