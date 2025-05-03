@@ -1,0 +1,160 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define optimize() ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+typedef long long ll;
+#define vi vector<int>
+#define vl vector<ll>
+#define pb push_back
+#define all(v) v.begin(), v.end()
+#define cy cout << "YES\n"
+#define cn cout << "NO\n"
+#define endl '\n'
+#define fl(s,e) for(ll i=s;i<e;i++)
+
+struct ShapeCollection {
+
+    struct Circle {
+        float r;
+    };
+    struct Rectangle {
+        float w, h;
+    };
+    struct Cube {
+        float a, b, c;
+    };
+
+    Circle cir[500];
+    Rectangle rec[500];
+    Cube cu[500];
+
+    ll c_cnt = 0, r_cnt = 0, cu_cnt = 0;
+    ll c_area = 0, r_area = 0, cube_area = 0;
+
+    void addCircle(float r) {
+        cir[c_cnt].r = r;
+        c_area += 3.1416 * r * r;
+        c_cnt++;
+    }
+
+    void addRectangle(float h, float w) {
+        rec[r_cnt].h = h;
+        rec[r_cnt].w = w;
+        r_area += h * w;
+        r_cnt++;
+    }
+
+    void addCube(float a, float b, float c) {
+        cu[cu_cnt].a = a;
+        cu[cu_cnt].b = b;
+        cu[cu_cnt].c = c;
+        cube_area += a * b * c;
+        cu_cnt++;
+    }
+
+    void listItems() {
+        ll rank = 1;
+        cout << "ID     Type     Dimensions" << endl;
+        cout << "=============================" << endl;
+
+        fl(0, c_cnt) {
+            cout << rank++ << "    Circle      " << cir[i].r << endl;
+        }
+
+        fl(0, r_cnt) {
+            cout << rank++ << "  Rectangle   " << rec[i].h << " x " << rec[i].w << endl;
+        }
+
+        fl(0, cu_cnt) {
+            cout << rank++ << "     Cube     " << cu[i].a << " x " << cu[i].b << " x " << cu[i].c << endl;
+        }
+
+        cout << endl;
+    }
+
+    void showStatistics() {
+        ll total = r_area + c_area + cube_area;
+        cout << "Total shapes: " << r_cnt + c_cnt + cu_cnt << endl;
+        cout << "Total number of Rectangles: " << r_cnt << endl;
+        cout << "Total number of Circles: " << c_cnt << endl;
+        cout << "Total number of Cubes: " << cu_cnt << endl;
+        cout << "Total area: " << total << endl;
+
+        cout << "The total area occupied by rectangles: " << r_area << " ";
+        cout << "(" << (r_area * 100) / total << "%)" << endl;
+
+        cout << "The total area occupied by circles: " << c_area << " ";
+        cout << "(" << (c_area * 100) / total << "%)" << endl;
+
+        cout << "The total area occupied by cubes: " << cube_area << " ";
+        cout << "(" << (cube_area * 100) / total << "%)" << endl;
+
+        cout << endl;
+    }
+};
+
+int main() {
+    optimize();
+    ShapeCollection shapes;
+
+    while (1) {
+        cout << "1. Add a circle\n"
+             << "2. Add a rectangle\n"
+             << "3. Add a cube\n"
+             << "4. List items\n"
+             << "5. Get Statistic\n"
+             << "6. Exit\n";
+
+        cout << "\nEnter Your Choice: ";
+        int option;
+        cin >> option;
+        cout << endl;
+
+        ll a, b, c;
+
+        switch (option) {
+            case 1:
+                cout << "What is the diameter: ";
+                cin >> a;
+                shapes.addCircle(a);
+                cout << endl;
+                break;
+
+            case 2:
+                cout << "What is the height: ";
+                cin >> a;
+                cout << "What is the width: ";
+                cin >> b;
+                shapes.addRectangle(a, b);
+                cout << endl;
+                break;
+
+            case 3:
+                cout << "What is the height: ";
+                cin >> a;
+                cout << "What is the width: ";
+                cin >> b;
+                cout << "What is the depth: ";
+                cin >> c;
+                shapes.addCube(a, b, c);
+                cout << endl;
+                break;
+
+            case 4:
+                shapes.listItems();
+                break;
+
+            case 5:
+                shapes.showStatistics();
+                break;
+
+            case 6:
+                return 0;
+
+            default:
+                cout << "Wrong Input." << endl << endl;
+        }
+    }
+
+    return 0;
+}
