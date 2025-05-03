@@ -54,7 +54,7 @@ int main() {
     vector<pair<ll,ll>> Gsum;
 
     fl(0,g){
-        cout<<i+1<<" th Goalkeeper name: ";
+        cout<<i+1<<" th Goalkeeper's name: ";
         cin.ignore();
         getline(cin, Gname[i]);
         cout<<Gname[i]<<"'s Goal: ";
@@ -73,7 +73,7 @@ int main() {
     vector<pair<ll,ll>> Rsum;
 
     fl(0,r){
-        cout<<i+1<<" th Goalkeeper name: ";
+        cout<<i+1<<" th referee's name: ";
         cin.ignore();
         getline(cin, Rname[i]);
         cout<<Rname[i]<<"'s Wrong decisions: ";
@@ -92,17 +92,18 @@ int main() {
   
     fl(0,f){
         ll idx=Fsum[i].second;
-        cout<<i+1<<"    ";
+        cout<<i+1<<"      ";
 
         space=14-Fname[idx].size();
         
+        if((space&1)!=0)cout<<" ";
         for(int k=0;k<space/2;k++)cout<<" ";
         cout<<Fname[idx];
         for(int k=0;k<space/2;k++)cout<<" ";
         cout<<"    ";
 
         for(int j=0;j<3;j++){
-            cout<<Goals[i][j]<<"        ";
+            cout<<Goals[idx][j]<<"        ";
         }
         cout<<Fsum[i].first<<endl;
     }
@@ -114,17 +115,18 @@ int main() {
     cout<<"---------------------------------------------------------------"<<endl;
     fl(0,g){
         ll idx=Gsum[i].second;
-        cout<<i+1<<"    ";
+        cout<<i+1<<"      ";
 
         space=14-Gname[idx].size();
         
+        if((space&1)!=0)cout<<" ";
         for(int k=0;k<space/2;k++)cout<<" ";
         cout<<Gname[idx];
         for(int k=0;k<space/2;k++)cout<<" ";
         cout<<"    ";
 
         for(int j=0;j<3;j++){
-            cout<<Saves[i][j]<<"        ";
+            cout<<Saves[idx][j]<<"        ";
         }
         cout<<Gsum[i].first<<endl;
     }
@@ -136,17 +138,18 @@ int main() {
     cout<<"---------------------------------------------------------------"<<endl;
     fl(0,r){
         ll idx=Rsum[i].second;
-        cout<<i+1<<"    ";
+        cout<<i+1<<"      ";
 
         space=14-Rname[idx].size();
         
+        if((space&1)!=0)cout<<" ";
         for(int k=0;k<space/2;k++)cout<<" ";
         cout<<Rname[idx];
         for(int k=0;k<space/2;k++)cout<<" ";
         cout<<"    ";
 
         for(int j=0;j<3;j++){
-            cout<<Wdecisions[i][j]<<"        ";
+            cout<<Wdecisions[idx][j]<<"        ";
         }
         cout<<Rsum[i].first<<endl;
     }
