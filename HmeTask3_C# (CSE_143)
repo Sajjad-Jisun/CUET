@@ -1,0 +1,71 @@
+using System;
+
+namespace LibraryProjet
+{
+    class Book
+    {
+        public string bookId;
+        public string title;
+        public string author;
+        public bool isAvailable;
+
+        public Book(string id, string t, string a, bool available)
+        {
+            bookId=id;
+            title=t;
+            author=a;
+            isAvailable=available;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Enter the number of books (1-10): ");
+            int total;
+            total=Convert.ToInt16(Console.ReadLine());
+
+            Book[] books=new Book[total];
+
+            for (int i=0; i<total; i++)
+            {
+                Console.WriteLine("\nEnter details for Book "+(i+1)+":");
+
+                Console.Write("Book id : ");
+                string id=Console.ReadLine()!;
+
+                Console.Write("Title : ");
+                string title=Console.ReadLine()!;
+
+                Console.Write("Author : ");
+                string author=Console.ReadLine()!;
+
+                Console.Write("Is the book available? (yes/no): ");
+                string input=Console.ReadLine()!;
+                bool isAvailable=input.Equals("yes");
+
+                books[i]=new Book(id, title, author, isAvailable);
+            }
+
+            Console.WriteLine("\nAvailable Books are : ");
+            bool found=false;
+
+            for (int i=0; i<total; i++)
+            {
+                if (books[i].isAvailable)
+                {
+                    Console.WriteLine("Book ID: "+books[i].bookId +
+                                      ", Title: "+books[i].title +
+                                      ", Author: "+books[i].author);
+                    found=true;
+                }
+            }
+
+            if (!found)
+            {
+                Console.WriteLine("No books are currently available.");
+            }
+        }
+    }
+}
