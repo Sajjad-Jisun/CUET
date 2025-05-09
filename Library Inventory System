@@ -1,0 +1,134 @@
+using System;
+using System.Data.Common;
+
+namespace LIS
+{
+    class Book{
+        public int id;
+        public string name;
+        public int page;
+
+        public Book(int id, string s, int page){
+            this.id=id;
+            name=s;
+            this.page=page;
+        }
+    }
+
+    class Journal{
+        public int id; public string name; public int num;
+        public Journal(int id, string s, int num){
+            this.id=id;
+            name=s;
+            this.num=num;
+        }
+    }
+
+    class DVD{
+        public int id;public string name;public float time;
+        public DVD(int id, string s, float time){
+            this.id=id;
+            name=s;
+            this.time=time;
+        }
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            List<Book> book= new List<Book>();
+            List<Journal> journal=new List<Journal>();
+            List<DVD> dvd=new List<DVD>();
+            int bid=0,jid=0,did=0;
+
+            while(true)
+            {
+                Console.Write("1. Add a book\n"+
+                              "2. Add a journal\n"+
+                              "3. Add a DVD\n"+
+                              "4. List items\n"+
+                              "5. Exit\n");
+
+                Console.Write("Enter Your Choice: ");
+                int option=Convert.ToInt32(Console.ReadLine());
+                
+                string s; int a;
+                switch(option)
+                {
+                    case 1:
+                    bid++;
+                    Console.Write("Enter the name: ");
+                    s=Console.ReadLine()!;
+                    Console.Write("Enter the page of the book: ");
+                    a=Convert.ToInt32(Console.ReadLine());
+
+                    Console.WriteLine();    
+                    book.Add(new Book(bid,s,a));
+                    break;
+
+                    case 2:
+                    jid++;
+                    Console.Write("Enter the name: ");
+                    s=Console.ReadLine()!;
+                    Console.Write("Enter the issue num: ");
+                    a=Convert.ToInt32(Console.ReadLine());
+
+                    Console.WriteLine();
+                    journal.Add(new Journal(jid,s,a));
+                    break;
+
+                    case 3:
+                    did++;
+                    Console.Write("Enter the name: ");
+                    s=Console.ReadLine()!;
+                    Console.Write("Enter the duration: ");
+                    a=Convert.ToInt32(Console.ReadLine());
+
+                    Console.WriteLine();
+                    dvd.Add(new DVD(did,s,a));
+                    break;
+
+                    case 4:
+                    if(bid>0){
+                        Console.WriteLine("\n--- Book List ---");
+                        Console.WriteLine("ID Type Details");
+                        foreach(var b in book)
+                        {
+                            Console.WriteLine($"{b.id} Book   Title: {b.name}, Pages: {b.page}");
+                        }
+                    }
+                    
+                    if(jid>0){
+                        Console.WriteLine("\n--- Journal List ---");
+                        Console.WriteLine("ID Type Details");
+                        foreach(var j in journal)
+                        {
+                            Console.WriteLine($"{j.id} Journal  Title: {j.name}, Pages: {j.num}");
+                        }
+                    }
+
+                    if(did>0){
+                        Console.WriteLine("\n--- DVD List ---");
+                        Console.WriteLine("ID Type Details");
+                        foreach(var d in dvd)
+                        {
+                            Console.WriteLine($"{d.id} DVD  Title: {d.name}, Duration: {d.time}\n");
+                        }
+                    }
+                    break;
+
+                    case 5:
+                    Console.WriteLine("Exiting...");
+                    return;
+                    
+                    default:    
+                    Console.WriteLine("Invalid option. Please try again.");
+                    break; 
+                }
+
+            }
+
+        }
+    }
+}
