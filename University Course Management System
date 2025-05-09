@@ -1,0 +1,128 @@
+using System;
+
+namespace HW5
+{
+    class Course{
+        public int id, credit;
+        public string title;
+        public Course(int a,string s,int b){
+            id=a; title=s; credit=b;
+        }
+    }
+
+    class Seminer{
+        public int id, duration;
+        public string title;
+        public Seminer(int a, string s, int b){
+            id=a; title=s; duration=b;
+        }
+    }
+
+    class Lab{
+        public int id, equip_cnt;
+        public string title;
+        public Lab(int a, string s, int b){
+            id=a; title=s; equip_cnt=b;
+        }
+    }
+
+    class Program
+    {
+        static void Main(){
+            List<Course> course=new List<Course>();
+            List<Lab> lab= new List<Lab>();
+            List<Seminer> seminer=new List<Seminer>();
+            int course_cnt=0,lab_cnt=0,seminer_cnt=0;
+            int a,b;
+            string s;
+
+            while(true){
+                Console.Write("1. Add a Course\n"+
+                              "2. Add a Seminer\n"+
+                              "3. Add a Lab\n"+
+                              "4. List items\n"+
+                              "5. Exit\n");
+                Console.Write("Enter Your Option: ");
+                int option=Convert.ToInt16(Console.ReadLine());
+
+                switch(option){
+                    case 1:
+                    course_cnt++;
+                    Console.Write("Enter the title: ");
+                    s=Console.ReadLine()!;
+                    Console.Write("Credit: ");
+                    a=Convert.ToInt16(Console.ReadLine());
+                    
+                    course.Add(new Course(course_cnt,s,a));
+                    break;
+
+                    case 2:
+                    seminer_cnt++;
+                    Console.Write("Enter the title: ");
+                    s=Console.ReadLine()!;
+                    Console.Write("Duration: ");
+                    a=Convert.ToInt16(Console.ReadLine());
+                    
+                    seminer.Add(new Seminer(seminer_cnt,s,a));
+                    break;
+
+                    case 3:
+                    lab_cnt++;
+                    Console.Write("Enter the title: ");
+                    s=Console.ReadLine()!;
+                    Console.Write("Equipment Count: ");
+                    a=Convert.ToInt16(Console.ReadLine());
+                    
+                    lab.Add(new Lab(lab_cnt,s,a));
+                    break;
+
+                    case 4:
+                     if(course_cnt>0){
+                        Console.WriteLine("\n--- Course List ---");
+                        Console.WriteLine("ID  Type  Details");
+                        foreach(var x in course)
+                        {
+                            Console.WriteLine($"{x.id}   Course  Title:{x.title}, Credits:{x.credit}");
+                        }
+                    }
+                    
+                    if(seminer_cnt>0){
+                        Console.WriteLine("\n--- Seminer List ---");
+                        Console.WriteLine("ID  Type    Details");
+                        foreach(var x in seminer)
+                        {
+                            Console.WriteLine($"{x.id}  Seminer  Title:{x.title}, Duration:{x.duration}");
+                        }
+                    }
+
+                    if(lab_cnt>0){
+                        Console.WriteLine("\n--- Lab List ---");
+                        Console.WriteLine("ID Type Details");
+                        foreach(var x in lab)
+                        {
+                            Console.WriteLine($"{x.id} Truck  Title:{x.title}, Equipment:{x.equip_cnt}\n");
+                        }
+                    }
+
+                    Console.WriteLine($"Total Courses: {course_cnt}");
+                    Console.WriteLine($"Total seminer: {seminer_cnt}");
+                    Console.WriteLine($"Total Lab: {lab_cnt}\n");
+                    break;
+
+                    case 5:
+                    Console.WriteLine("Exiting...\n");
+                    return;
+
+                    default:
+                    Console.WriteLine("Please enter between 1-5.");
+                    break;
+
+
+                }
+
+
+            }
+
+        }
+    }
+}
