@@ -1,0 +1,134 @@
+using System;
+using System.Data.Common;
+
+namespace LIS
+{
+    class Car{
+        public int id;
+        public string model;
+        public int hp;
+
+        public Car(int id, string s, int page){
+            this.id=id;
+            model=s;
+            this.hp=page;
+        }
+    }
+
+    class Motorcycle{
+        public int id; public string model; public int Engine_capa;
+        public Motorcycle(int id, string s, int num){
+            this.id=id;
+            model=s;
+            this.Engine_capa=num;
+        }
+    }
+
+    class Truck{
+        public int id;public string name;public float time;
+        public Truck(int id, string s, float time){
+            this.id=id;
+            name=s;
+            this.time=time;
+        }
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            List<Car> car= new List<Car>();
+            List<Motorcycle> motorcycles=new List<Motorcycle>();
+            List<Truck> truck=new List<Truck>();
+            int bid=0,jid=0,did=0;
+
+            while(true)
+            {
+                Console.Write("1. Add a Car\n"+
+                              "2. Add a Motorcycle\n"+
+                              "3. Add a Truck\n"+
+                              "4. List items\n"+
+                              "5. Exit\n");
+
+                Console.Write("Enter Your Choice: ");
+                int option=Convert.ToInt32(Console.ReadLine());
+                
+                string s; int a;
+                switch(option)
+                {
+                    case 1:
+                    bid++;
+                    Console.Write("Enter the model: ");
+                    s=Console.ReadLine()!;
+                    Console.Write("Enter the hp: ");
+                    a=Convert.ToInt32(Console.ReadLine());
+
+                    Console.WriteLine();    
+                    car.Add(new Car(bid,s,a));
+                    break;
+
+                    case 2:
+                    jid++;
+                    Console.Write("Enter the model: ");
+                    s=Console.ReadLine()!;
+                    Console.Write("Enter the Engine: ");
+                    a=Convert.ToInt32(Console.ReadLine());
+
+                    Console.WriteLine();
+                    motorcycles.Add(new Motorcycle(jid,s,a));
+                    break;
+
+                    case 3:
+                    did++;
+                    Console.Write("Enter the model: ");
+                    s=Console.ReadLine()!;
+                    Console.Write("Enter the payload: ");
+                    a=Convert.ToInt32(Console.ReadLine());
+
+                    Console.WriteLine();
+                    truck.Add(new Truck(did,s,a));
+                    break;
+
+                    case 4:
+                    if(bid>0){
+                        Console.WriteLine("\n--- Car List ---");
+                        Console.WriteLine("ID Type Details");
+                        foreach(var b in car)
+                        {
+                            Console.WriteLine($"{b.id} Car   Model: {b.model}, HoursePower: {b.hp}");
+                        }
+                    }
+                    
+                    if(jid>0){
+                        Console.WriteLine("\n--- Motorcycle List ---");
+                        Console.WriteLine("ID Type   Details");
+                        foreach(var j in motorcycles)
+                        {
+                            Console.WriteLine($"{j.id} Motorcycle  Title: {j.model}, Engine Capacity: {j.Engine_capa}");
+                        }
+                    }
+
+                    if(did>0){
+                        Console.WriteLine("\n--- Truck List ---");
+                        Console.WriteLine("ID Type Details");
+                        foreach(var d in truck)
+                        {
+                            Console.WriteLine($"{d.id} Truck  Title: {d.name}, Payload: {d.time}\n");
+                        }
+                    }
+                    break;
+
+                    case 5:
+                    Console.WriteLine("Exiting...");
+                    return;
+                    
+                    default:    
+                    Console.WriteLine("Invalid option. Please try again.");
+                    break; 
+                }
+
+            }
+
+        }
+    }
+}
