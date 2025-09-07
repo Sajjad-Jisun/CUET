@@ -1,0 +1,63 @@
+using System;
+namespace std
+{
+    class Book
+    {
+        public string Title;
+        public string Author;
+        public Book(string title, string author)
+        {
+            Title = title;
+            Author = author;
+        }
+        public Book(string title)
+        {
+            Title = title;
+        }
+        public void Display()
+        {
+            Console.WriteLine($"Title: {Title}, Author: {Author}");
+        }
+
+    }
+
+    class Program
+    {
+        public static void Main()
+        {
+            List<Book> obj = new List<Book>();
+
+            while (true)
+            {
+                Console.WriteLine("1. Add Book");
+                Console.WriteLine("2. Exit");
+                Console.WriteLine("Enter Your choice: ");
+
+                int choice = Convert.ToInt16(Console.ReadLine());
+
+                if (choice == 1)
+                {
+                    string title, author;
+                    Console.WriteLine("1.Title and autor -- 2.only title?");
+                    int x = Convert.ToInt16(Console.ReadLine());
+                    if (x == 1)
+                    {
+                        title = Console.ReadLine();
+                        author = Console.ReadLine();
+                        obj.Add(new Book(title, author));
+                    }
+                    else
+                    {
+                        title = Console.ReadLine();
+                        obj.Add(new Book(title));
+                    }
+                }
+                else break;
+            }
+            foreach (var it in obj)
+            {
+                it.Display();
+            }
+        }
+    }
+}
