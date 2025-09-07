@@ -1,0 +1,50 @@
+using System;
+using System.Reflection;
+namespace std
+{
+    abstract class Shape
+    {
+        public double Height;
+        public double Width;
+        public Shape(double a, double b)
+        {
+            Height = a;
+            Width = b;
+        }
+        public abstract double calculateAree();
+    }
+
+    class Rectangle : Shape
+    {
+        public Rectangle(double a, double b) : base(a, b) { }
+        public override double calculateAree()
+        {
+            return Height * Width;
+        }
+    }
+    class Circle : Shape
+    {
+        public double radius;
+        public Circle(double radius) : base(0, 0)
+        {
+            this.radius = radius;
+        }
+
+        public override double calculateAree()
+        {
+            return 3.1416 * radius * radius;
+        }
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            Shape rect = new Rectangle(4, 5);
+            Shape circle = new Circle(3);
+
+            Console.WriteLine("Rectangle Area: " + rect.calculateAree());
+            Console.WriteLine("Circle Area: " + circle.calculateAree());
+        }
+    }
+}
