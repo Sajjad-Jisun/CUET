@@ -1,0 +1,107 @@
+using System;
+
+namespace std
+{
+    class Vehicle
+    {
+        public string Company;
+        public string Model;
+        public double RentalRate;
+
+        public Vehicle(string Company, string Model, double RentalRate)
+        {
+            this.Company = Company;
+            this.Model = Model;
+            this.RentalRate = RentalRate;
+        }
+        public virtual double Cost(int day)
+        {
+            return day * RentalRate;
+        }
+        public virtual void Display()
+        {
+            Console.WriteLine($"Model : {Model}, Complay : {Company}, Rate : {RentalRate}");
+        }
+    }
+
+    class Car : Vehicle
+    {
+        public Car(string a, string b, double c) : base(a, b, c) { }
+        public override double Cost(int day)
+        {
+            double cost = 0;
+            if (day > 7)
+            {
+                return RentalRate * .9 * day;
+            }
+            else return base.Cost(day);
+        }
+    }
+
+    class Bike : Vehicle
+    {
+        public Bike(string a, string b, double c) : base(a, b, c) { }
+        public override double Cost(int day)
+        {
+            double cost = 0;
+            if (day > 3)
+            {
+                return RentalRate * .8 * day;
+            }
+            else return base.Cost(day);
+        }
+    }
+    class Truck : Vehicle
+    {
+        public double LoadCapacity;
+        public Truck(string a, string b, double c, double x) : base(a, b, c)
+        {
+            LoadCapacity = x;
+        }
+        public override double Cost(int day)
+        {
+            double cost = 0;
+            return (RentalRate + (LoadCapacity * 50)) * day;
+        }
+        public override void Display()
+        {
+            base.Display();
+            Console.WriteLine($"Load capacity : {LoadCapacity}");
+        }
+    }
+
+    class NegetiveNumberException : Exception {
+        public NegetiveNumberException() : base("Negetive Number") { }
+        public NegetiveNumberException(string message) : base(message) { }
+    }
+
+    class Program
+    {
+        public static void Main()
+        {
+            List<Vehicle> obj = new List<Vehicle> {
+                new Car("Toyota", "Corolla", 50),
+                new Bike("Yamaha", "FZ", 15),
+                new Truck("Volvo", "FH16", 100, 5)
+            };
+
+            Console.WriteLine("For how many day do you want to rent? ");
+            int choice = 0;
+            try
+            {
+                choice = Convert.ToInt16(Console.ReadLine());
+                if (choice < 0) throw new NegetiveNumberException("FUCK OFF!");
+                foreach(var it in obj) {
+                it.Display();
+                Console.WriteLine("COST: " + it.Cost(choice));
+                Console.WriteLine();
+            }
+            }
+            catch (NegetiveNumberException ex)
+            {
+                Console.WriteLine("Exception : " + ex.Message);
+            }
+
+        }
+    }
+}
